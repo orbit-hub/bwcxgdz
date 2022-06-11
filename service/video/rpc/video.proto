@@ -1,14 +1,17 @@
 syntax = "proto3";
-import "google/protobuf/empty.proto";
-option go_package = ".;proto";
+
+package user;
+option go_package = "./proto";
 
 service User{
-  rpc feed(google.protobuf.Empty) returns (VideoListResponse); //视频流
+  rpc feed(EmptyRequest) returns (VideoListResponse); //视频流
   rpc GetVideoInfoById(IdRequest) returns (VideoInfoResponse); //通过id获取视频信息
   rpc Publish(VideoInfoRequest) returns (PublishResponse);
   rpc PublishVideoList(IdRequest) returns (VideoListResponse);
 }
+message EmptyRequest{
 
+}
 message IdRequest{
   uint32 id = 1 ;
 }

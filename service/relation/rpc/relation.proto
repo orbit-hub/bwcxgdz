@@ -1,5 +1,6 @@
 syntax = "proto3";
-option go_package = ".;proto";
+package relation;
+option go_package = "./proto";
 
 service relation {
     rpc RelationAction(RelationActionRequest) returns (ActionResponse);
