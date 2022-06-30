@@ -7,8 +7,8 @@ import (
 const (
 	MaxFileSize     = 10 << 26 // 10 MB
 	Endpoint        = "http://oss-cn-hangzhou.aliyuncs.com"
-	AccessKeyId     = "LTAI5tFHvbtRnPSDjDNenhaq"
-	AccessKeySecret = "vyOZaYQOufzUMzw8LMchWbVAj7Hh80"
+	AccessKeyId     = "L"
+	AccessKeySecret = "v"
 	BucketName      = "dousheng-bwcxgdz"
 )
 
