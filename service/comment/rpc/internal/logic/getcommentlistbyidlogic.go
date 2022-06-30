@@ -1,10 +1,9 @@
 package logic
 
 import (
+	"bwcxgdz/dousheng/service/comment/rpc/internal/svc"
+	"bwcxgdz/dousheng/service/comment/rpc/proto"
 	"context"
-
-	"rpc/internal/svc"
-	"rpc/proto"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,7 +23,19 @@ func NewGetCommentListByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 func (l *GetCommentListByIdLogic) GetCommentListById(in *proto.VideoIdRequest) (*proto.CommentListResponse, error) {
-	// todo: add your logic here and delete this line
-
-	return &proto.CommentListResponse{}, nil
+	res, err := l.svcCtx.CommentModel.FindByVideoId(l.ctx, in.Id)
+	if err != nil {
+		return nil, err
+	}
+	infos := make([]*proto.CommentInfoResponse, 0)
+	for _, r := range res {
+		infos = append(infos, &proto.CommentInfoResponse{
+			Id:      r.Id,
+			UserId:  r.UserId,
+			Content: r.Content,
+		})
+	}
+	return &proto.CommentListResponse{
+		Data: infos,
+	}, nil
 }

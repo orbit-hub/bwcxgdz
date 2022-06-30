@@ -1,13 +1,12 @@
 package main
 
 import (
+	"bwcxgdz/dousheng/service/comment/rpc/internal/config"
+	"bwcxgdz/dousheng/service/comment/rpc/internal/server"
+	"bwcxgdz/dousheng/service/comment/rpc/internal/svc"
+	"bwcxgdz/dousheng/service/comment/rpc/proto"
 	"flag"
 	"fmt"
-
-	"rpc/internal/config"
-	"rpc/internal/server"
-	"rpc/internal/svc"
-	"rpc/proto"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

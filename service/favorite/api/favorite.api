@@ -1,0 +1,62 @@
+type (
+
+	// 点赞列表
+	FavoriteListRequest {
+		UserId int64  `json:"user_id"`
+		Token  string `json:"token"`
+	}
+	VideoListResponse {
+		StatusCode    int64        `json:"status_code"`
+		StatusMsg     string       `json:"status_msg"`
+		VideoInfoList []*VideoInfo `json:"video_list"`
+	}
+	// 点赞列表
+
+	// 点赞
+	FavoriteRequest {
+		Token      string `json:"token"`
+		VideoId    int64  `json:"video_id"`
+		ActionType int32  `json:"action_type"`
+	}
+	FavoriteResponse {
+		StatusCode    int64        `json:"status_code"`
+		StatusMsg     string       `json:"status_msg"`
+	}
+	// 点赞
+
+	// 视频信息
+	VideoInfo {
+		Id           int64    `json:"id"`
+		Author       UserInfo `json:"author"`
+		PlayUrl      string   `json:"play_url"`
+		CoverUrl     string   `json:"cover_url"`
+		FavoriteCunt int64    `json:"favorite_count"`
+		CommentCount int64    `json:"comment_count"`
+		IsFavorite   bool     `json:"is_favorite"`
+		Title        string   `json:"title"`
+	}
+	// 视频信息
+
+	// 用户信息
+	UserInfo {
+		Id            int64  `json:"id"`
+		Name          string `json:"name"`
+		FollowCount   int64  `json:"follow_count"`
+		FollowerCount int64  `json:"follower_count"`
+		IsFollow      bool   `json:"is_follow"`
+	}
+	// 用户信息
+)
+
+@server(
+	jwt: Auth
+)
+service favorite {
+	
+	@handler FavoriteList
+	get /douyin/favorite/list(FavoriteListRequest) returns (VideoListResponse)
+	
+	@handler Favorite
+	post /douyin/favorite/action(FavoriteRequest) returns (FavoriteResponse)
+	
+}

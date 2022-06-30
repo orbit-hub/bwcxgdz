@@ -1,0 +1,16 @@
+Name: user.rpc
+ListenOn: 0.0.0.0:9000
+Etcd:
+  Hosts:
+  - 192.168.241.130:2379
+  Key: user.rpc
+
+Mysql:
+  DataSource: root:123456@tcp(127.0.0.1:3306)/dousheng?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+
+CacheRedis:
+  - Host: 192.168.241.130:6379
+    Type: node
+    Pass:
+
+Salt: SiYAlMK8qTZkzEsDRMNjDw9JJoOMnrJM

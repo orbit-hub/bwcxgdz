@@ -1,0 +1,64 @@
+type (
+
+	// 关注列表
+	FollowListRequest {
+		UserId int64  `json:"user_id"`
+		Token  string `json:"token"`
+	}
+	FollowListResponse {
+		StatusCode int64       `json:"status_code"`
+		StatusMsg  string      `json:"status_msg"`
+		UserList   []*UserInfo `json:"user_list"`
+	}
+	// 关注列表
+
+	// 粉丝列表
+	FollowerListRequest {
+		UserId int64  `json:"user_id"`
+		Token  string `json:"token"`
+	}
+	FollowerListResponse {
+		StatusCode int64       `json:"status_code"`
+		StatusMsg  string      `json:"status_msg"`
+		UserList   []*UserInfo `json:"user_list"`
+	}
+	// 粉丝列表
+
+	// 关注
+	RelationRequest {
+		Token      string `json:"token"`
+		ToUserId   int64  `json:"to_user_id"`
+		ActionType int32  `json:"action_type"`
+	}
+	RelationResponse {
+		StatusCode int64  `json:"status_code"`
+		StatusMsg  string `json:"status_msg"`
+	}
+	// 关注
+
+	// 用户信息
+	UserInfo {
+		Id            int64  `json:"id"`
+		Name          string `json:"name"`
+		FollowCount   int64  `json:"follow_count"`
+		FollowerCount int64  `json:"follower_count"`
+		IsFollow      bool   `json:"is_follow"`
+	}
+	// 用户信息
+)
+
+@server(
+	jwt: Auth
+)
+service relation {
+	
+	@handler FollowList
+	get /douyin/relation/follow/list(FollowListRequest) returns (FollowListResponse)
+	
+	@handler FollowerList
+	get /douyin/relation/follower/list(FollowerListRequest) returns (FollowerListResponse)
+	
+	@handler Relation
+	post /douyin/relation/action(RelationRequest) returns (RelationResponse)
+	
+}

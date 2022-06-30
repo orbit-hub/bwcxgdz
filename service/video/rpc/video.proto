@@ -1,28 +1,33 @@
 syntax = "proto3";
-
-package user;
+package video;
 option go_package = "./proto";
 
-service User{
-  rpc feed(EmptyRequest) returns (VideoListResponse); //视频流
-  rpc GetVideoInfoById(IdRequest) returns (VideoInfoResponse); //通过id获取视频信息
+service Video{
+  rpc feed(FeedRequest) returns (FeedListResponse); //视频流
   rpc Publish(VideoInfoRequest) returns (PublishResponse);
   rpc PublishVideoList(IdRequest) returns (VideoListResponse);
+  rpc GetVideoInfoById(IdRequest) returns (VideoInfoResponse);
 }
-message EmptyRequest{
+message FeedRequest{
+  int64 latestTime = 1;
+}
 
+message FeedListResponse {
+  int64 nextTime =1;
+  repeated VideoInfoResponse videoList = 2 ;
 }
+
 message IdRequest{
-  uint32 id = 1 ;
+  int64 id = 1 ;
 }
 
 message VideoInfoRequest{
-  uint32 userId  = 1 ;
+  int64 userId  = 1 ;
   string playUrl = 2 ;
   string coverUrl = 3 ;
   int64 favoriteCount = 4 ;
   int64  commentCount = 5 ;
-  string title = 7 ;
+  string title = 6 ;
 }
 
 message PublishResponse{
@@ -30,16 +35,16 @@ message PublishResponse{
 }
 
 message VideoListResponse {
-  repeated VideoInfoResponse videoList = 1 ;
+  repeated VideoInfoResponse videoList = 1;
 }
 
 message VideoInfoResponse {
-  uint32 id  = 1 ;
-  string playUrl = 2 ;
-  string coverUrl = 3 ;
-  int64 favoriteCount = 4 ;
-  int64  commentCount = 5 ;
-  bool isFavorite = 6 ;
+  int64 id  = 1 ;
+  int64 authorId = 2;
+  string playUrl = 3 ;
+  string coverUrl = 4 ;
+  int64 favoriteCount = 5 ;
+  int64  commentCount = 6 ;
   string title = 7 ;
 }
 

@@ -1,0 +1,76 @@
+type (
+	// 视频流
+	FeedRequest {
+		LatestTime int64  `json:"latest_time,optional"`
+		Token      string `json:"token,optional"`
+	}
+
+	VideoListResponse {
+		StatusCode    int64        `json:"status_code"`
+		StatusMsg     string       `json:"status_msg"`
+		NextTime      int64        `json:"next_time"`
+		VideoInfoList []*VideoInfo `json:"video_list"`
+	}
+	// 视频流
+
+	// 发布列表
+	PublishListRequest {
+		UserId int64  `json:"user_id"`
+		Token  string `json:"token"`
+	}
+	// 发布列表
+
+	// 投稿
+	PublishRequest {
+		Token string `json:"token"`
+		Title string `json:"title"`
+		Data
+	}
+	PublishResponse {
+		StatusCode    int64        `json:"status_code"`
+		StatusMsg     string       `json:"status_msg"`
+	}
+	// 投稿
+
+	// 视频信息
+	VideoInfo {
+		Id           int64    `json:"id"`
+		Author       UserInfo `json:"author"`
+		PlayUrl      string   `json:"play_url"`
+		CoverUrl     string   `json:"cover_url"`
+		FavoriteCunt int64    `json:"favorite_count"`
+		CommentCount int64    `json:"comment_count"`
+		IsFavorite   bool     `json:"is_favorite"`
+		Title        string   `json:"title"`
+	}
+	// 视频信息
+
+	// 用户信息
+	UserInfo {
+		Id            int64  `json:"id"`
+		Name          string `json:"name"`
+		FollowCount   int64  `json:"follow_count"`
+		FollowerCount int64  `json:"follower_count"`
+		IsFollow      bool   `json:"is_follow"`
+	}
+	// 用户信息
+)
+
+service video {
+	@handler feed
+	get /douyin/feed(FeedRequest) returns (VideoListResponse)
+	
+}
+
+@server(
+	jwt: Auth
+)
+service video {
+	
+	@handler PublishList
+	get /douyin/publish/list(PublishListRequest) returns (VideoListResponse)
+	
+	@handler Publish
+	post /douyin/publish/action(PublishRequest) returns (PublishResponse)
+	
+}

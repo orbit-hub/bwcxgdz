@@ -8,8 +8,8 @@ service favorite {
 }
 
 message ActionRequest{
-    uint32 id = 1;
-    uint32 videoID = 2;
+    int64 id = 1;
+    int64 videoID = 2;
     int32 actionType = 3;
 }
 
@@ -18,9 +18,9 @@ message ActionResponse{
 }
 
 message IdRequest{
-    uint32 id = 1 ;
+    int64 id = 1 ;
 }
 
 message videoIdListResponse{
-    repeated uint32 videoIdList = 1;
+    repeated int64 videoIdList = 1;
 }

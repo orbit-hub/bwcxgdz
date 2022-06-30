@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"rpc/internal/logic"
-	"rpc/internal/svc"
-	"rpc/proto"
+	"bwcxgdz/dousheng/service/comment/rpc/internal/logic"
+	"bwcxgdz/dousheng/service/comment/rpc/internal/svc"
+	"bwcxgdz/dousheng/service/comment/rpc/proto"
 )
 
 type CommentServer struct {

@@ -6,7 +6,7 @@ package comment
 import (
 	"context"
 
-	"rpc/proto"
+	"bwcxgdz/dousheng/service/comment/rpc/proto"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
